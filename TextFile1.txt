@@ -1,0 +1,10 @@
+Tom Kench	Tank	AP	TOP	6300
+Lux	Mage	AP	MID	4800
+Nunu	Jungler	AP	JUNGLE	1350
+Lucian	ADC	AD	BOT	6300
+Ezreal	ADC	AD	BOT	4800
+Darius	Bruiser	AD	TOP	4800
+Singed	Tank	AP	TOP	450
+Nasus	Tank	AD	TOP	1350
+Sona	Support	AP	BOT	6300
+Amumu	Jungler	AP	JUNGLE	1350

@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="Test.Views.AddObjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Test.Views"
+             xmlns:viewmodel="clr-namespace:Test.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:ForEnumtoVisibilityConverter x:Key="enumtovisibility"/>
+        <local:ForComboboxItemChosenVisibilityConverter x:Key="comboboxchosenvalue"/>
+        <local:ForTextAddColonConverter x:Key="addcolon"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding ObjectInformation}" HorizontalContentAlignment="Stretch">
+            <!--#region Get Rid of ListViewItem Style-->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Name="Border" BorderBrush="LightGray" BorderThickness="0,0,0,1">
+                                    <ContentPresenter/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <!--#endregion-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <UniformGrid Columns="2">
+                        <TextBlock Grid.Row="0" Text="{Binding ObjectDetailName, Converter={StaticResource addcolon}}" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,2,10,5" HorizontalAlignment="Right">
+                            <!--#region TextBox-->
+                            <TextBox Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=TextBox}" Width="100"/>
+                            <!--#endregion-->
+                            <!--#region ComboBox-->
+                            <Grid Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=ComboBox}">
+                                <ComboBox x:Name="cbselect" Width="110" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}"
+                                              SelectedItem="{Binding Path=DataContext.SelectItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
+                                <TextBlock Background="Transparent" Text="--Please Select--" Visibility="{Binding Path=SelectedItem, ElementName=cbselect, Converter={StaticResource comboboxchosenvalue}}" 
+                                               IsHitTestVisible="False" VerticalAlignment="Center" Margin="7,0,0,0"/>
+                            </Grid>
+                            <!--#endregion-->
+                            <!--#region RadioButton-->
+                            <ListView BorderThickness="0" Background="Transparent" BorderBrush="Transparent"
+                                          Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=RadioButton}" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
+                                                <RadioButton GroupName="OptionsChoice"/>
+                                            </StackPanel>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            <!--#endregion-->
+                        </StackPanel>
+                    </UniformGrid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Background="WhiteSmoke">
+            <Button x:Name="SubmitObject" Click="SubmitObject_Click" Height="20" Width="100" VerticalAlignment="Center" Margin="0,0,30,0">
+                <TextBlock Text="Submit"/>
+            </Button>
+            <Button x:Name="CancelObject" Click="CancelObject_Click" Height="20" Width="100" VerticalAlignment="Center">
+                <TextBlock Text="Cancel"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
