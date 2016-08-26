@@ -23,7 +23,7 @@ namespace Test.Resources
         private void InitialLoadListObjectModel()
         {
             ListObjectModel = new List<ListObjectModel>();
-            string fileName = "C:/Users/Arnold/Desktop/Test Project/TextFile1.txt";
+            string fileName = "C:/Users/Little Intern/Desktop/Test/TextFile1.txt";
             ListObjectModel = System.IO.File.ReadAllLines(fileName)
                         .Select(r => r.Split('\t', '\n'))
                         .Select(s => new ListObjectModel()
