@@ -9,35 +9,89 @@ using System.Threading.Tasks;
 namespace Test.Models
 {
     public enum entryTypes { TextBox, ComboBox, RadioButton }
-    public class ObjectDetailsInfo
+    public class OptionsDataNames: INotifyPropertyChanged, ICloneable
+    {
+        public OptionsDataNames(string temp = "")
+        {
+            dataname = temp;
+        }
+
+        private string dataname;
+        public string DataName
+        {
+            get
+            {
+                return dataname;
+            }
+            set
+            {
+                dataname = value;
+                RaisePropertyChanged("DataName");
+            }
+        }
+
+        public override string ToString()
+        {
+            return dataname;
+        }
+
+        #region Property Changed
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+        #region Clone
+        public object Clone()
+        {
+            return new OptionsDataNames
+            {
+                dataname = this.dataname
+            };
+        }
+        #endregion
+    }
+    public class ObjectDetailsInfo: INotifyPropertyChanged, ICloneable
     {
         public string ObjectDetailName
         {
             get;
             set;
         }
+
+        private entryTypes optionsentrymethod;
         public entryTypes OptionsEntryMethod
         {
-            get;
-            set;
+            get
+            {
+                return optionsentrymethod;
+            }
+            set
+            {
+                optionsentrymethod = value;
+                RaisePropertyChanged("OptionsEntryMethod");
+            }
         }
-        public List<string> OptionsEntryNames
+
+        private ObservableCollection<OptionsDataNames> optionsentrynames;
+        public ObservableCollection<OptionsDataNames> OptionsEntryNames
         {
-            get;
-            set;
-        }
-    }
-
-    public class ListObjectModel : INotifyPropertyChanged
-    {
-
-        public string Name
-        {
-            get;
-            set;
+            get
+            {
+                return optionsentrynames != null ? optionsentrynames : new ObservableCollection<OptionsDataNames>();
+            }
+            set
+            {
+                optionsentrynames = value;
+                RaisePropertyChanged("OptionsEntryNames");
+            }
         }
 
-        public ObservableCollection<ObjectDetailsInfo> ObjectDetails
+        public uint key
         {
             get;
             set;
@@ -51,6 +105,63 @@ namespace Test.Models
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+        #endregion
+        #region Clone
+        public object Clone()
+        {
+            return new ObjectDetailsInfo
+            {
+                ObjectDetailName = this.ObjectDetailName,
+                OptionsEntryMethod = this.OptionsEntryMethod,
+                key = this.key,
+                optionsentrynames = new ObservableCollection<OptionsDataNames>(optionsentrynames.Select(z => z.Clone()).Cast<OptionsDataNames>())
+            };
+        }
+        #endregion
+    }
+
+    public class ListObjectModel : INotifyPropertyChanged, ICloneable
+    {
+
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        private ObservableCollection<ObjectDetailsInfo> objectdetails;
+        public ObservableCollection<ObjectDetailsInfo> ObjectDetails
+        {
+            get
+            {
+                return objectdetails != null ? objectdetails : new ObservableCollection<ObjectDetailsInfo>();
+            }
+            set
+            {
+                objectdetails = value;
+                RaisePropertyChanged("ObjectDetails");
+            }
+        }
+
+        #region Property Changed
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
+        #region Clone
+        public object Clone()
+        {
+            return new ListObjectModel
+            {
+                Name = this.Name,
+                objectdetails = new ObservableCollection<ObjectDetailsInfo>(objectdetails.Select(x => x.Clone()).Cast<ObjectDetailsInfo>())
+            };
         }
         #endregion
     }

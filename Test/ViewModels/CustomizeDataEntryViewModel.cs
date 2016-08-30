@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Test.Models;
 
 namespace Test.ViewModels
@@ -33,37 +34,27 @@ namespace Test.ViewModels
             }
         }
 
-        private string selectitem;
-        public string SelectItem
-        {
-            get
-            {
-                return selectitem;
-            }
-            set
-            {
-                selectitem = value;
-                RaisePropertyChanged("SelectedItem");
-            }
-        }
-
 
         public void loadObjectDetails(ObjectListViewModel viewmodel)
         {
             ObjectDetailsInfo hi = new ObjectDetailsInfo();
             hi.ObjectDetailName = "baby";
             hi.OptionsEntryMethod = entryTypes.ComboBox;
-            hi.OptionsEntryNames = new List<string> { "one", "two", "three" };
+            hi.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1"), new OptionsDataNames("2"), new OptionsDataNames("3") };
+            hi.key = 0;
             ObjectDetailsInfo hi1 = new ObjectDetailsInfo();
             hi1.ObjectDetailName = "baby1";
             hi1.OptionsEntryMethod = entryTypes.TextBox;
-            hi1.OptionsEntryNames = new List<string> { "1", "2", "3" };
+            hi1.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("a"), new OptionsDataNames("b"), new OptionsDataNames("c") };
+            hi1.key = 1;
             ObjectDetailsInfo hi2 = new ObjectDetailsInfo();
             hi2.ObjectDetailName = "baby2";
             hi2.OptionsEntryMethod = entryTypes.RadioButton;
-            hi2.OptionsEntryNames = new List<string> { "11", "22", "33" };
+            hi2.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1a"), new OptionsDataNames("2b"), new OptionsDataNames("3c") };
+            hi2.key = 2;
 
             ObjectInformation = viewmodel.AddObjectInfo.ObjectDetails;
+            //initialize deep copy instead here but later
             if(ObjectInformation == null)
             {
                 ObjectInformation = new ObservableCollection<ObjectDetailsInfo>();
@@ -78,14 +69,27 @@ namespace Test.ViewModels
 
         }
 
-        public void addObjectDetails()
+        public void AddItem()
         {
-
+            ObjectInformation.Add(new ObjectDetailsInfo());
         }
-        
-        public void deleteObjectDetails()
-        {
 
+        public void AddItem(string currentlistname)
+        {
+            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.ObjectDetailName == currentlistname)).OptionsEntryNames;
+            o.Add(new OptionsDataNames());
+        }
+
+
+        public void RemoveDetailField(string currentobject)
+        {
+            ObjectInformation.Remove(ObjectInformation.FirstOrDefault(z => z.ObjectDetailName == currentobject));
+        }
+
+        public void RemoveDetailField(string currentlistname, string currentitem)
+        {
+            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.ObjectDetailName == currentlistname)).OptionsEntryNames;
+            o.Remove(o.FirstOrDefault(z => z.DataName == currentitem));
         }
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
