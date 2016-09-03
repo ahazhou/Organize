@@ -82,7 +82,11 @@ namespace Test.Models
         {
             get
             {
-                return optionsentrynames != null ? optionsentrynames : new ObservableCollection<OptionsDataNames>();
+                if(optionsentrynames == null)
+                {
+                    optionsentrynames = new ObservableCollection<OptionsDataNames>();
+                }
+                return optionsentrynames;
             }
             set
             {
@@ -115,7 +119,7 @@ namespace Test.Models
                 ObjectDetailName = this.ObjectDetailName,
                 OptionsEntryMethod = this.OptionsEntryMethod,
                 key = this.key,
-                optionsentrynames = new ObservableCollection<OptionsDataNames>(optionsentrynames.Select(z => z.Clone()).Cast<OptionsDataNames>())
+                OptionsEntryNames = new ObservableCollection<OptionsDataNames>(OptionsEntryNames.Select(z => z.Clone()).Cast<OptionsDataNames>())
             };
         }
         #endregion
@@ -135,7 +139,11 @@ namespace Test.Models
         {
             get
             {
-                return objectdetails != null ? objectdetails : new ObservableCollection<ObjectDetailsInfo>();
+                if(objectdetails == null)
+                {
+                    objectdetails = new ObservableCollection<ObjectDetailsInfo>();
+                }
+                return objectdetails;
             }
             set
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,21 @@ namespace Test.ViewModels
         {
             testdata = new GetData();
             LoadData();
+            Messenger.Default.Register<ObservableCollection<ObjectDetailsInfo>>(this, ChangeCollection);
+        }
+
+        private void ChangeCollection(ObservableCollection<ObjectDetailsInfo> obj)
+        {
+            foreach(var listObject in TestCollection)
+            {
+                AddObjectInfo.ObjectDetails.Clear();
+                listObject.ObjectDetails.Clear();
+                foreach (var ob in obj)
+                {
+                    AddObjectInfo.ObjectDetails.Add(ob.Clone() as ObjectDetailsInfo);
+                    listObject.ObjectDetails.Add(ob.Clone() as ObjectDetailsInfo);
+                }
+            }
         }
 
         private void LoadData()
@@ -32,6 +48,10 @@ namespace Test.ViewModels
         {
             get
             {
+                if(addobjectinfo == null)
+                {
+                    addobjectinfo = new ListObjectModel();
+                }
                 return addobjectinfo;
             }
             set

@@ -31,10 +31,25 @@ namespace Test.Views
             
         }
 
+
+        #region Submitting the Object
+        public static readonly RoutedEvent SaveInfoEvent = EventManager.RegisterRoutedEvent("Save_Click",
+                                                                                RoutingStrategy.Bubble,
+                                                                                typeof(RoutedEventHandler),
+                                                                                typeof(AddObjectView));
+
+        public event RoutedEventHandler Save_Click
+        {
+            add { AddHandler(SaveInfoEvent, value); }
+            remove { RemoveHandler(SaveInfoEvent, value); }
+        }
+
         private void SaveInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.updateObjectDetails();
+            RaiseEvent(new RoutedEventArgs(SaveInfoEvent, this));
         }
+        #endregion
 
         private void AddItem_Click(object sender, RoutedEventArgs e)
         {

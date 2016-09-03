@@ -52,7 +52,6 @@ namespace Test.Views
                 #region Add Object
                 addView.Submit_Click += (s, _e) =>
                 {
-                    var temp = ViewModel.AddObjectInfo;
                     window.Close();
                     ViewModel.AddObject();
                 };
@@ -73,8 +72,13 @@ namespace Test.Views
             if(ViewModel != null)
             {
                 Window window = new Window();
-                ViewModel.AddObjectInfo = new ListObjectModel();
                 CustomizeDataEntryView addView = new CustomizeDataEntryView(ViewModel);
+                #region Save Object
+                addView.Save_Click += (s, _e) =>
+                {
+                    window.Close();
+                };
+                #endregion
                 window.Content = addView;
                 window.Height = window.Width = 300;
                 window.ShowDialog();

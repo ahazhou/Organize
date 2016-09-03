@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Test.Models;
+using Test.Resources;
 
 namespace Test.ViewModels
 {
@@ -37,21 +39,21 @@ namespace Test.ViewModels
 
         public void loadObjectDetails(ObjectListViewModel viewmodel)
         {
-            ObjectDetailsInfo hi = new ObjectDetailsInfo();
-            hi.ObjectDetailName = "baby";
-            hi.OptionsEntryMethod = entryTypes.ComboBox;
-            hi.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1"), new OptionsDataNames("2"), new OptionsDataNames("3") };
-            hi.key = 0;
-            ObjectDetailsInfo hi1 = new ObjectDetailsInfo();
-            hi1.ObjectDetailName = "baby1";
-            hi1.OptionsEntryMethod = entryTypes.TextBox;
-            hi1.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("a"), new OptionsDataNames("b"), new OptionsDataNames("c") };
-            hi1.key = 1;
-            ObjectDetailsInfo hi2 = new ObjectDetailsInfo();
-            hi2.ObjectDetailName = "baby2";
-            hi2.OptionsEntryMethod = entryTypes.RadioButton;
-            hi2.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1a"), new OptionsDataNames("2b"), new OptionsDataNames("3c") };
-            hi2.key = 2;
+            //ObjectDetailsInfo hi = new ObjectDetailsInfo();
+            //hi.ObjectDetailName = "baby";
+            //hi.OptionsEntryMethod = entryTypes.ComboBox;
+            //hi.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1"), new OptionsDataNames("2"), new OptionsDataNames("3") };
+            //hi.key = 0;
+            //ObjectDetailsInfo hi1 = new ObjectDetailsInfo();
+            //hi1.ObjectDetailName = "baby1";
+            //hi1.OptionsEntryMethod = entryTypes.TextBox;
+            //hi1.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("a"), new OptionsDataNames("b"), new OptionsDataNames("c") };
+            //hi1.key = 1;
+            //ObjectDetailsInfo hi2 = new ObjectDetailsInfo();
+            //hi2.ObjectDetailName = "baby2";
+            //hi2.OptionsEntryMethod = entryTypes.RadioButton;
+            //hi2.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1a"), new OptionsDataNames("2b"), new OptionsDataNames("3c") };
+            //hi2.key = 2;
 
             ObjectInformation = viewmodel.AddObjectInfo.ObjectDetails;
             //initialize deep copy instead here but later
@@ -59,14 +61,14 @@ namespace Test.ViewModels
             {
                 ObjectInformation = new ObservableCollection<ObjectDetailsInfo>();
             }
-            ObjectInformation.Add(hi);
-            ObjectInformation.Add(hi1);
-            ObjectInformation.Add(hi2);
+            //ObjectInformation.Add(hi);
+            //ObjectInformation.Add(hi1);
+            //ObjectInformation.Add(hi2);
         }
 
         public void updateObjectDetails()
         {
-
+            Messenger.Default.Send(ObjectInformation);
         }
 
         public void AddItem()
