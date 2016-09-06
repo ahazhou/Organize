@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Arnold\Desktop\Test Project\Test\obj\Debug\
+C:\Users\Arnold\Desktop\Project\Test\obj\Debug\
 Test
 none
 false
 DEBUG;TRACE
-C:\Users\Arnold\Desktop\Test Project\Test\App.xaml
+C:\Users\Arnold\Desktop\Project\Test\App.xaml
 31416773892
 
 18-2078978288
 15767094614
 Views\AddObjectView.xaml;Views\CustomizeDataEntryView.xaml;Views\ObjectListView.xaml;
 
-False
+True
 

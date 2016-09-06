@@ -58,22 +58,22 @@ namespace Test.Views
 
         private void AddField_Click(object sender, RoutedEventArgs e)
         {
-            string currentlist = (sender as Button).Tag as string;
-            ViewModel.AddItem(currentlist);
+            uint currentkey = (uint)((sender as Button).Tag);
+            ViewModel.AddItem(currentkey);
         }
 
         private void RemoveField_Click(object sender, RoutedEventArgs e)
         {
-            string currentobject = (sender as Button).Tag as string;
-            ViewModel.RemoveDetailField(currentobject);
+            uint currentkey = (uint)((sender as Button).Tag);
+            ViewModel.RemoveDetailField(currentkey);
         }
 
         private void RemoveDataField_Click(object sender, RoutedEventArgs e)
         {
             //may cause issues with slowing the program (space vs time)
-            string currentlistname = (sender as Button).Tag as string;
-            string currentitem = ((sender as Button).FindName("CurrentItem") as TextBox).Text;
-            ViewModel.RemoveDetailField(currentlistname, currentitem);
+            uint currentlistkey = (uint)((sender as Button).Tag);
+            uint currentitem = (uint)((sender as Button).FindName("CurrentItem") as TextBox).Tag;
+            ViewModel.RemoveDetailField(currentlistkey, currentitem);
         }
 
         private CustomizeDataEntryViewModel ViewModel

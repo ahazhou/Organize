@@ -30,6 +30,12 @@ namespace Test.Models
             }
         }
 
+        public uint innerKey
+        {
+            get;
+            set;
+        }
+
         public override string ToString()
         {
             return dataname;

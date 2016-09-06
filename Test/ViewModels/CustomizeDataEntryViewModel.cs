@@ -36,35 +36,19 @@ namespace Test.ViewModels
             }
         }
 
-
+        private static uint originalMaxKey = 0;
         public void loadObjectDetails(ObjectListViewModel viewmodel)
         {
-            //ObjectDetailsInfo hi = new ObjectDetailsInfo();
-            //hi.ObjectDetailName = "baby";
-            //hi.OptionsEntryMethod = entryTypes.ComboBox;
-            //hi.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1"), new OptionsDataNames("2"), new OptionsDataNames("3") };
-            //hi.key = 0;
-            //ObjectDetailsInfo hi1 = new ObjectDetailsInfo();
-            //hi1.ObjectDetailName = "baby1";
-            //hi1.OptionsEntryMethod = entryTypes.TextBox;
-            //hi1.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("a"), new OptionsDataNames("b"), new OptionsDataNames("c") };
-            //hi1.key = 1;
-            //ObjectDetailsInfo hi2 = new ObjectDetailsInfo();
-            //hi2.ObjectDetailName = "baby2";
-            //hi2.OptionsEntryMethod = entryTypes.RadioButton;
-            //hi2.OptionsEntryNames = new ObservableCollection<OptionsDataNames> { new OptionsDataNames("1a"), new OptionsDataNames("2b"), new OptionsDataNames("3c") };
-            //hi2.key = 2;
-
-            ObjectInformation = viewmodel.AddObjectInfo.ObjectDetails;
-            //initialize deep copy instead here but later
-            if(ObjectInformation == null)
+            if(viewmodel.AddObjectInfo.ObjectDetails.Count != 0)
+            {
+                ListObjectModel CopyModel = viewmodel.AddObjectInfo.Clone() as ListObjectModel;
+                ObjectInformation = CopyModel.ObjectDetails;
+            }
+            else
             {
                 ObjectInformation = new ObservableCollection<ObjectDetailsInfo>();
             }
-            //ObjectInformation.Add(hi);
-            //ObjectInformation.Add(hi1);
-            //ObjectInformation.Add(hi2);
-        }
+         }
 
         public void updateObjectDetails()
         {
@@ -73,25 +57,43 @@ namespace Test.ViewModels
 
         public void AddItem()
         {
-            ObjectInformation.Add(new ObjectDetailsInfo());
+            ObjectDetailsInfo toAdd = new ObjectDetailsInfo();
+            if(ObjectInformation.Count() != 0)
+            {
+                if(ObjectInformation.Last().key > originalMaxKey)
+                {
+                    toAdd.key = ObjectInformation.Last().key + 1;
+                }
+                else
+                {
+                    toAdd.key = originalMaxKey + 1;
+                }
+            }
+            else
+            {
+                toAdd.key = 0;
+            }
+            ObjectInformation.Add(toAdd);
         }
 
-        public void AddItem(string currentlistname)
+        public void AddItem(uint currentkey)
         {
-            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.ObjectDetailName == currentlistname)).OptionsEntryNames;
-            o.Add(new OptionsDataNames());
+            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.key == currentkey)).OptionsEntryNames;
+            OptionsDataNames toAdd = new OptionsDataNames();
+            toAdd.innerKey = (o.Count() != 0) ? (o.Last().innerKey + 1) : 0;
+            o.Add(toAdd);
         }
 
 
-        public void RemoveDetailField(string currentobject)
+        public void RemoveDetailField(uint currentkey)
         {
-            ObjectInformation.Remove(ObjectInformation.FirstOrDefault(z => z.ObjectDetailName == currentobject));
+            ObjectInformation.Remove(ObjectInformation.FirstOrDefault(z => z.key == currentkey));
         }
 
-        public void RemoveDetailField(string currentlistname, string currentitem)
+        public void RemoveDetailField(uint currentlistkey, uint currentkey)
         {
-            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.ObjectDetailName == currentlistname)).OptionsEntryNames;
-            o.Remove(o.FirstOrDefault(z => z.DataName == currentitem));
+            ObservableCollection<OptionsDataNames> o = (ObjectInformation.FirstOrDefault(x => x.key == currentlistkey)).OptionsEntryNames;
+            o.Remove(o.FirstOrDefault(z => z.innerKey == currentkey));
         }
         #region Property Changed
         public event PropertyChangedEventHandler PropertyChanged;
