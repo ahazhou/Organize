@@ -18,60 +18,71 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <ItemsControl Grid.Row="0" ItemsSource="{Binding TestCollection}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" Margin="5">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
-                            <ItemsControl ItemsSource="{Binding ObjectDetails}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <UniformGrid Columns="2">
-                                            <TextBlock Text="{Binding ObjectDetailName, Converter={StaticResource addcolon}}" 
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding TestCollection}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" Margin="5">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
+                                <ItemsControl ItemsSource="{Binding ObjectDetails}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <UniformGrid Columns="2">
+                                                <TextBlock Text="{Binding ObjectDetailName, Converter={StaticResource addcolon}}" 
                                                FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0" 
                                                VerticalAlignment="Center" FontSize="7"/>
-                                            <Grid HorizontalAlignment="Stretch" Margin="0,2,10,5" VerticalAlignment="Center">
-                                                <!--#region TextBox-->
-                                                <TextBox Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=TextBox}" HorizontalAlignment="Stretch"/>
-                                                <!--#endregion-->
-                                                <!--#region ComboBox-->
-                                                <Grid Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=ComboBox}">
-                                                    <ComboBox x:Name="cbselect" Width="110" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}" HorizontalAlignment="Left"
+                                                <Grid HorizontalAlignment="Stretch" Margin="0,2,10,5" VerticalAlignment="Center">
+                                                    <!--#region TextBox-->
+                                                    <TextBox Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=TextBox}" HorizontalAlignment="Stretch"/>
+                                                    <!--#endregion-->
+                                                    <!--#region ComboBox-->
+                                                    <Grid Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=ComboBox}">
+                                                        <ComboBox x:Name="cbselect" Width="110" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}" HorizontalAlignment="Left"
                                                         SelectedItem="{Binding Path=DataContext.SelectItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
-                                                    <TextBlock Background="Transparent" Text="--Please Select--" Visibility="{Binding Path=SelectedItem, ElementName=cbselect, Converter={StaticResource comboboxchosenvalue}}" 
+                                                        <TextBlock Background="Transparent" Text="--Please Select--" Visibility="{Binding Path=SelectedItem, ElementName=cbselect, Converter={StaticResource comboboxchosenvalue}}" 
                                                         IsHitTestVisible="False" VerticalAlignment="Center" Margin="7,0,0,0" HorizontalAlignment="Left"/>
-                                                </Grid>
-                                                <!--#endregion-->
-                                                <!--#region RadioButton-->
-                                                <ItemsControl BorderThickness="0" Background="Transparent" BorderBrush="Transparent" Visibility="{Binding OptionsEntryMethod, 
+                                                    </Grid>
+                                                    <!--#endregion-->
+                                                    <!--#region RadioButton-->
+                                                    <ItemsControl BorderThickness="0" Background="Transparent" BorderBrush="Transparent" Visibility="{Binding OptionsEntryMethod, 
                                                     Converter={StaticResource enumtovisibility}, ConverterParameter=RadioButton}" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <WrapPanel x:Name="wrappanel" Background="Transparent">
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <RadioButton GroupName="OptionsChoice"/>
-                                                                    <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
-                                                                </StackPanel>
-                                                            </WrapPanel>
-                                                            <DataTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter Property="Background" Value="LightBlue" TargetName="wrappanel"/>
-                                                                </Trigger>
-                                                            </DataTemplate.Triggers>
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                                <!--#endregion-->
-                                            </Grid>
-                                        </UniformGrid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <WrapPanel x:Name="wrappanel" Background="Transparent">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <RadioButton GroupName="OptionsChoice"/>
+                                                                        <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
+                                                                    </StackPanel>
+                                                                </WrapPanel>
+                                                                <DataTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="LightBlue" TargetName="wrappanel"/>
+                                                                    </Trigger>
+                                                                </DataTemplate.Triggers>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                    <!--#endregion-->
+                                                </Grid>
+                                            </UniformGrid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <Button x:Name="AddObject" Click="AddObject_Click" Height="20" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Add Item"/>
+                    </Button>
+                </Grid>
+            </Grid>
         </ScrollViewer>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Background="WhiteSmoke">
             <Button x:Name="SubmitObject" Click="SubmitObject_Click" Height="20" Width="100" VerticalAlignment="Center" Margin="0,0,30,0">

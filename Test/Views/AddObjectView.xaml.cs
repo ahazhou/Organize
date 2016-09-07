@@ -55,5 +55,10 @@ namespace Test.Views
             RaiseEvent(new RoutedEventArgs(CancelEvent, this));
         }
         #endregion
+
+        private void AddObject_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
