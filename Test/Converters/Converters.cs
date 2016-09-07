@@ -38,7 +38,7 @@ namespace Test.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((string)value) + ":";
+            return (value != null) ? (((string)value) + ":") : "{--EMPTY--}:";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

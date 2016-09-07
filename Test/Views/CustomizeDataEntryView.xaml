@@ -40,7 +40,7 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="Name:" FontWeight="Bold" Margin="0,0,7,0" VerticalAlignment="Center"/>
                                     <TextBox Grid.Column="1" Text="{Binding ObjectDetailName, Mode=TwoWay, NotifyOnSourceUpdated=True}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Background="Transparent"/>
-                                    <Button Grid.Column="2" x:Name="RemoveField" Click="RemoveField_Click" Tag="{Binding key}"
+                                    <Button Grid.Column="2" x:Name="RemoveField" Click="RemoveField_Click" Tag="{Binding key}" IsTabStop="False"
                                             Height="15" Width="15" Margin="5" Background="Transparent" BorderBrush="LightBlue" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <TextBlock Text="-" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Button>
@@ -71,7 +71,7 @@
                                             <DataTemplate>
                                                 <DockPanel>
                                                     <Button x:Name="RemoveDataField" Click="RemoveDataField_Click" Height="15" Width="15" Margin="3" Background="Transparent" BorderBrush="Transparent"
-                                                            Tag="{Binding DataContext.key, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}">
+                                                            Tag="{Binding DataContext.key, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}}}" IsTabStop="False">
                                                         <TextBlock Text="-" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                                     </Button>
                                                     <TextBox x:Name="CurrentItem" Text="{Binding DataName, Mode=TwoWay, NotifyOnSourceUpdated=True}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent"

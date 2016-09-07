@@ -15,62 +15,64 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" ItemsSource="{Binding ObjectInformation}" HorizontalContentAlignment="Stretch">
-            <!--#region Get Rid of ListViewItem Style-->
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Name="Border" BorderBrush="LightGray" BorderThickness="0,0,0,1">
-                                    <ContentPresenter/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <!--#endregion-->
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <UniformGrid Columns="2">
-                        <TextBlock Grid.Row="0" Text="{Binding ObjectDetailName, Converter={StaticResource addcolon}}" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,2,10,5" HorizontalAlignment="Right">
-                            <!--#region TextBox-->
-                            <TextBox Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=TextBox}" Width="100"/>
-                            <!--#endregion-->
-                            <!--#region ComboBox-->
-                            <Grid Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=ComboBox}">
-                                <ComboBox x:Name="cbselect" Width="110" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}"
-                                              SelectedItem="{Binding Path=DataContext.SelectItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
-                                <TextBlock Background="Transparent" Text="--Please Select--" Visibility="{Binding Path=SelectedItem, ElementName=cbselect, Converter={StaticResource comboboxchosenvalue}}" 
-                                               IsHitTestVisible="False" VerticalAlignment="Center" Margin="7,0,0,0"/>
-                            </Grid>
-                            <!--#endregion-->
-                            <!--#region RadioButton-->
-                            <ListView BorderThickness="0" Background="Transparent" BorderBrush="Transparent"
-                                          Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=RadioButton}" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}">
-                                <ListView.ItemTemplate>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Grid.Row="0" ItemsSource="{Binding TestCollection}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" Margin="5">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
+                            <ItemsControl ItemsSource="{Binding ObjectDetails}">
+                                <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <WrapPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
-                                                <RadioButton GroupName="OptionsChoice"/>
-                                            </StackPanel>
-                                        </WrapPanel>
+                                        <UniformGrid Columns="2">
+                                            <TextBlock Text="{Binding ObjectDetailName, Converter={StaticResource addcolon}}" 
+                                               FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0" 
+                                               VerticalAlignment="Center" FontSize="7"/>
+                                            <Grid HorizontalAlignment="Stretch" Margin="0,2,10,5" VerticalAlignment="Center">
+                                                <!--#region TextBox-->
+                                                <TextBox Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=TextBox}" HorizontalAlignment="Stretch"/>
+                                                <!--#endregion-->
+                                                <!--#region ComboBox-->
+                                                <Grid Visibility="{Binding OptionsEntryMethod, Converter={StaticResource enumtovisibility}, ConverterParameter=ComboBox}">
+                                                    <ComboBox x:Name="cbselect" Width="110" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}" HorizontalAlignment="Left"
+                                                        SelectedItem="{Binding Path=DataContext.SelectItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
+                                                    <TextBlock Background="Transparent" Text="--Please Select--" Visibility="{Binding Path=SelectedItem, ElementName=cbselect, Converter={StaticResource comboboxchosenvalue}}" 
+                                                        IsHitTestVisible="False" VerticalAlignment="Center" Margin="7,0,0,0" HorizontalAlignment="Left"/>
+                                                </Grid>
+                                                <!--#endregion-->
+                                                <!--#region RadioButton-->
+                                                <ItemsControl BorderThickness="0" Background="Transparent" BorderBrush="Transparent" Visibility="{Binding OptionsEntryMethod, 
+                                                    Converter={StaticResource enumtovisibility}, ConverterParameter=RadioButton}" ItemsSource="{Binding OptionsEntryNames, Mode=OneWay}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <WrapPanel x:Name="wrappanel" Background="Transparent">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <RadioButton GroupName="OptionsChoice"/>
+                                                                    <TextBlock Text="{Binding}" Margin="0,0,10,0"/>
+                                                                </StackPanel>
+                                                            </WrapPanel>
+                                                            <DataTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter Property="Background" Value="LightBlue" TargetName="wrappanel"/>
+                                                                </Trigger>
+                                                            </DataTemplate.Triggers>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                                <!--#endregion-->
+                                            </Grid>
+                                        </UniformGrid>
                                     </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            <!--#endregion-->
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
-                    </UniformGrid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Background="WhiteSmoke">
             <Button x:Name="SubmitObject" Click="SubmitObject_Click" Height="20" Width="100" VerticalAlignment="Center" Margin="0,0,30,0">
                 <TextBlock Text="Submit"/>

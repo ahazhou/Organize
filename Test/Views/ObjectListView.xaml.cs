@@ -45,7 +45,6 @@ namespace Test.Views
             if(ViewModel != null)
             {
                 Window window = new Window();
-                ViewModel.AddObjectInfo = new ListObjectModel();
                 AddObjectView addView = new AddObjectView(ViewModel);
                 window.Content = addView;
                 window.Height = window.Width = 300;
