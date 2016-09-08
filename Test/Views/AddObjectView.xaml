@@ -24,7 +24,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <ItemsControl Grid.Row="0" ItemsSource="{Binding TestCollection}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" Margin="5">
+                <ItemsControl Grid.Row="0" ItemsSource="{Binding Collection}" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" Margin="5">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">

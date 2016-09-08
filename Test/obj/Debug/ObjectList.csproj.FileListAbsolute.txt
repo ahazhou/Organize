@@ -35,12 +35,6 @@ C:\Users\Arnold\Desktop\Test Project\Test\obj\Debug\Views\ObjectListView.baml
 C:\Users\Arnold\Desktop\Test Project\Test\obj\Debug\Test.g.resources
 C:\Users\Arnold\Desktop\Test Project\Test\obj\Debug\Test.Properties.Resources.resources
 C:\Users\Arnold\Desktop\Test Project\Test\obj\Debug\ObjectList.csproj.GenerateResource.Cache
-C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.exe.config
-C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test.exe
-C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test.pdb
-C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.exe
-C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.pdb
-C:\Users\Arnold\Desktop\Project\Test\obj\Debug\ObjectList.csprojResolveAssemblyReference.cache
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\AddObjectView.g.cs
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\CustomizeDataEntryView.g.cs
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\ObjectListView.g.cs
@@ -48,6 +42,12 @@ C:\Users\Arnold\Desktop\Project\Test\obj\Debug\App.g.cs
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test_MarkupCompile.cache
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test_MarkupCompile.lref
+C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test.exe
+C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Test.pdb
+C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.exe.config
+C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.exe
+C:\Users\Arnold\Desktop\Project\Test\bin\Debug\Test.pdb
+C:\Users\Arnold\Desktop\Project\Test\obj\Debug\ObjectList.csprojResolveAssemblyReference.cache
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\AddObjectView.baml
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\CustomizeDataEntryView.baml
 C:\Users\Arnold\Desktop\Project\Test\obj\Debug\Views\ObjectListView.baml

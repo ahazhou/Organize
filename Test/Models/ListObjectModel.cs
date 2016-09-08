@@ -125,7 +125,9 @@ namespace Test.Models
                 ObjectDetailName = this.ObjectDetailName,
                 OptionsEntryMethod = this.OptionsEntryMethod,
                 key = this.key,
-                OptionsEntryNames = new ObservableCollection<OptionsDataNames>(OptionsEntryNames.Select(z => z.Clone()).Cast<OptionsDataNames>())
+                OptionsEntryNames = OptionsEntryNames.Count != 0 ? 
+                    new ObservableCollection<OptionsDataNames>(OptionsEntryNames.Select(z => z.Clone()).Cast<OptionsDataNames>()) 
+                    : new ObservableCollection<OptionsDataNames>()
             };
         }
         #endregion
@@ -133,6 +135,12 @@ namespace Test.Models
 
     public class ListObjectModel : INotifyPropertyChanged, ICloneable
     {
+        public ListObjectModel() { }
+        public ListObjectModel(ListObjectModel toAdd)
+        {
+            Name = toAdd.Name;
+            ObjectDetails = toAdd.ObjectDetails;
+        }
 
         public string Name
         {
@@ -174,7 +182,9 @@ namespace Test.Models
             return new ListObjectModel
             {
                 Name = this.Name,
-                objectdetails = new ObservableCollection<ObjectDetailsInfo>(objectdetails.Select(x => x.Clone()).Cast<ObjectDetailsInfo>())
+                objectdetails = ObjectDetails.Count != 0 ? 
+                    new ObservableCollection<ObjectDetailsInfo>(objectdetails.Select(x => x.Clone()).Cast<ObjectDetailsInfo>()) 
+                    : new ObservableCollection<ObjectDetailsInfo>()
             };
         }
         #endregion

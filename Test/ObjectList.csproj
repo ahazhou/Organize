@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Converters\Converters.cs" />
     <Compile Include="Resources\Messenger.cs" />
+    <Compile Include="ViewModels\AddObjectViewModel.cs" />
     <Compile Include="ViewModels\CustomizeDataEntryViewModel.cs" />
     <Compile Include="Views\AddObjectView.xaml.cs">
       <DependentUpon>AddObjectView.xaml</DependentUpon>

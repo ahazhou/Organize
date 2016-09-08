@@ -15,7 +15,7 @@ namespace Test.Views
     {
         public AddObjectView(ObjectListViewModel viewmodel)
         {
-            this.DataContext = viewmodel;
+            this.DataContext = new AddObjectViewModel(viewmodel);
             InitializeComponent();
         }
 
