@@ -62,6 +62,12 @@ namespace Test.Views
             ViewModel.AddNewObject();
         }
 
+        private void RemoveField_Click(object sender, RoutedEventArgs e)
+        {
+            string currentitem = (sender as Button).Tag as string;
+            ViewModel.RemoveExistingObject(currentitem);
+        }
+
         private AddObjectViewModel ViewModel
         {
             get

@@ -30,7 +30,17 @@
                         <DataTemplate>
                             <Border x:Name="border" Background="Transparent" BorderBrush="Transparent" BorderThickness="1">
                                 <StackPanel Orientation="Vertical">
-                                    <TextBox Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="11"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Text="{Binding Name}" FontWeight="Bold" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="11"/>
+                                        <Button Grid.Column="1" x:Name="RemoveField" Click="RemoveField_Click" Tag="{Binding Name}" IsTabStop="False"
+                                            Height="15" Width="15" Margin="5,5,10,5" Background="Transparent" BorderBrush="LightBlue" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <TextBlock Text="-" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Button>
+                                    </Grid>
                                     <ItemsControl ItemsSource="{Binding ObjectDetails}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>

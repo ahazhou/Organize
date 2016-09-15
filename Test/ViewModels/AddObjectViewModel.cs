@@ -28,6 +28,11 @@ namespace Test.ViewModels
             Collection.Add(new ListObjectModel(ListModel));
         }
 
+        public void RemoveExistingObject(string currentitem)
+        {
+            Collection.Remove(Collection.FirstOrDefault(x => x.Name == currentitem));
+        }
+
         public void SubmitObject()
         {
             Messenger.Default.Send(Collection, 2);
