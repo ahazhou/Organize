@@ -34,6 +34,18 @@ namespace Test.Converters
             throw new NotImplementedException();
         }
     }
+    public class ForTextisEmptyConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value.ToString() != "") ? value : "{--EMPTY--}:";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class ForTextAddColonConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

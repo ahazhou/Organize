@@ -101,6 +101,12 @@ namespace Test.Models
             }
         }
 
+        public string Choice
+        {
+            get;
+            set;
+        }
+
         public uint key
         {
             get;
@@ -125,6 +131,7 @@ namespace Test.Models
                 ObjectDetailName = this.ObjectDetailName,
                 OptionsEntryMethod = this.OptionsEntryMethod,
                 key = this.key,
+                Choice = this.Choice,
                 OptionsEntryNames = OptionsEntryNames.Count != 0 ? 
                     new ObservableCollection<OptionsDataNames>(OptionsEntryNames.Select(z => z.Clone()).Cast<OptionsDataNames>()) 
                     : new ObservableCollection<OptionsDataNames>()
@@ -140,6 +147,7 @@ namespace Test.Models
         {
             Name = toAdd.Name;
             ObjectDetails = toAdd.ObjectDetails;
+            ObjectDetails = new ObservableCollection<ObjectDetailsInfo>(objectdetails.Select(x => x.Clone()).Cast<ObjectDetailsInfo>());
         }
 
         public string Name

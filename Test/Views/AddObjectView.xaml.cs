@@ -35,6 +35,7 @@ namespace Test.Views
 
         private void SubmitObject_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.SubmitObject();
             RaiseEvent(new RoutedEventArgs(SubmitObjectEvent, this));
         }
         #endregion
@@ -58,7 +59,15 @@ namespace Test.Views
 
         private void AddObject_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.AddNewObject();
+        }
 
+        private AddObjectViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as AddObjectViewModel;
+            }
         }
     }
 }

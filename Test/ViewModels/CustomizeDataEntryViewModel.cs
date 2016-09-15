@@ -52,7 +52,7 @@ namespace Test.ViewModels
 
         public void updateObjectDetails()
         {
-            Messenger.Default.Send(ObjectInformation);
+            Messenger.Default.Send(ObjectInformation, 1);
         }
 
         public void AddItem()

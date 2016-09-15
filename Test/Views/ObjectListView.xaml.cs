@@ -52,7 +52,6 @@ namespace Test.Views
                 addView.Submit_Click += (s, _e) =>
                 {
                     window.Close();
-                    ViewModel.AddObject();
                 };
                 #endregion
                 #region Cancel Click

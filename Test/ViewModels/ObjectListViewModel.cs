@@ -21,7 +21,17 @@ namespace Test.ViewModels
         {
             testdata = new GetData();
             LoadData();
-            Messenger.Default.Register<ObservableCollection<ObjectDetailsInfo>>(this, ChangeCollection);
+            Messenger.Default.Register<ObservableCollection<ObjectDetailsInfo>>(this, ChangeCollection, 1);
+            Messenger.Default.Register<ObservableCollection<ListObjectModel>>(this, AlterModel, 2);
+        }
+
+        private void AlterModel(ObservableCollection<ListObjectModel> obj)
+        {
+            TestCollection.Clear();
+            foreach(var a in obj)
+            {
+                TestCollection.Add(a.Clone() as ListObjectModel);
+            }
         }
 
         private void ChangeCollection(ObservableCollection<ObjectDetailsInfo> obj)
@@ -61,6 +71,7 @@ namespace Test.ViewModels
             }
         }
 
+        #region Prospectively Remove
         public void AddObject()
         {
             if(addobjectinfo != null)
@@ -76,6 +87,7 @@ namespace Test.ViewModels
             testcollection.Add(model);
             RaisePropertyChanged("TestCollection");
         }
+        #endregion
 
         private ObservableCollection<ListObjectModel> testcollection;
         public ObservableCollection<ListObjectModel> TestCollection
